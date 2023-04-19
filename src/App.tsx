@@ -1,13 +1,9 @@
 import React from 'react';
-
-import useSpeechToText, { ResultType } from './Hooks';
-
-// @ts-ignore
+import './App.css';
+import useSpeechToText, { ResultType } from './hooks';
 import micIcon from './mic.svg';
 
-import './App.css';
-
-export default function App() {
+function App() {
   const {
     error,
     interimResult,
@@ -62,3 +58,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App;

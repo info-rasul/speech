@@ -2,10 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import Hark from 'hark';
 import { startRecording, stopRecording } from './recorderHelpers';
 
-// https://cloud.google.com/speech-to-text/docs/reference/rest/v1/RecognitionConfig
-import { GoogleCloudRecognitionConfig } from './GoogleCloudRecognitionConfig';
+import { GoogleCloudRecognitionConfig } from './googleCloudRecognitionConfig';
 
-// https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition
 export interface SpeechRecognitionProperties {
   // continuous: do not pass continuous here, instead pass it as a param to the hook
   grammars?: any;

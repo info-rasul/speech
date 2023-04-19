@@ -168,11 +168,11 @@ export class Recorder {
 
       // Down sample buffer before WAV encoding
       function downSampleBuffer(buffer, rate) {
-        if (rate == sampleRate) {
+        if (rate === sampleRate) {
           return buffer;
         }
         if (rate > sampleRate) {
-          throw 'downsampling rate show be smaller than original sample rate';
+          throw 'down sampling rate show be smaller than original sample rate';
         }
         var sampleRateRatio = sampleRate / rate;
         var newLength = Math.round(buffer.length / sampleRateRatio);
