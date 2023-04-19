@@ -3,6 +3,7 @@
   "version": "0.8.0",
   "private": false,
   "main": "dist/index.js",
+  "homepage": "https://info-rasul.github.io/speech/build",
   "license": "MIT",
   "author": "Riley Brown",
   "repository": "Riley-Brown/react-speech-to-text",
