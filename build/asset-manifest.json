@@ -13,9 +13,9 @@
     "static/media/mic.b386a135.svg": "/speech/build/static/media/mic.b386a135.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.254af856.js",
-    "static/js/2.d593ba18.chunk.js",
-    "static/css/main.2c1fb5b9.chunk.css",
-    "static/js/main.90e1eba1.chunk.js"
+    "/speech/build/static/js/runtime-main.254af856.js",
+    "/speech/build/static/js/2.d593ba18.chunk.js",
+    "/speech/build/static/css/main.2c1fb5b9.chunk.css",
+    "/speech/build/static/js/main.90e1eba1.chunk.js"
   ]
 }
