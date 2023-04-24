@@ -6,12 +6,12 @@ export class Recorder {
       bufferLen: 4096,
       numChannels: 1,
       mimeType: 'audio/wav',
-      ...cfg
+      ...cfg,
     };
     this.recording = false;
     this.callbacks = {
       getBuffer: [],
-      exportWAV: []
+      exportWAV: [],
     };
     this.context = source.context;
     this.node = (
@@ -32,7 +32,7 @@ export class Recorder {
       }
       this.worker.postMessage({
         command: 'record',
-        buffer: buffer
+        buffer: buffer,
       });
     };
 
@@ -244,8 +244,8 @@ export class Recorder {
       command: 'init',
       config: {
         sampleRate: this.context.sampleRate,
-        numChannels: this.config.numChannels
-      }
+        numChannels: this.config.numChannels,
+      },
     });
 
     this.worker.onmessage = (e) => {
@@ -286,7 +286,7 @@ export class Recorder {
 
     this.worker.postMessage({
       command: 'exportWAV',
-      type: mimeType
+      type: mimeType,
     });
   }
 

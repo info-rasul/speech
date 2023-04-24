@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
 import Hark from 'hark';
-import { startRecording, stopRecording } from './recorderHelpers';
+import { useState, useEffect, useRef } from 'react';
 
 import { GoogleCloudRecognitionConfig } from './googleCloudRecognitionConfig';
+import { startRecording, stopRecording } from './recorderHelpers';
 
 export interface SpeechRecognitionProperties {
   // continuous: do not pass continuous here, instead pass it as a param to the hook
@@ -21,10 +21,10 @@ interface BraveNavigator extends Navigator {
 }
 
 const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
-// @ts-ignore
-const SpeechRecognition = window.SpeechRecognition || (window as any).webkitSpeechRecognition;
-// @ts-ignore
-let recognition: SpeechRecognition | null;
+const SpeechRecognition =
+  (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+let recognition: typeof SpeechRecognition | null;
 
 export type ResultType = {
   speechBlob?: Blob;
@@ -70,7 +70,7 @@ export default function useSpeechToText({
   speechRecognitionProperties = { interimResults: true, lang: 'en-US' },
   timeout = 10000,
   useOnlyGoogleCloud = false,
-  useLegacyResults = true
+  useLegacyResults = true,
 }: UseSpeechToTextTypes) {
   const [isRecording, setIsRecording] = useState(false);
 
@@ -109,7 +109,7 @@ export default function useSpeechToText({
         'react-hook-speech-to-text is using legacy results, pass useLegacyResults: false to the hook to use the new array of objects results. Legacy array of strings results will be removed in a future version.'
       );
     }
-  }, []);
+  }, [crossBrowser, googleApiKey, useLegacyResults, useOnlyGoogleCloud]);
 
   // Chrome Speech Recognition API:
   // Only supported on Chrome browsers
@@ -143,7 +143,7 @@ export default function useSpeechToText({
             setInterimResult(undefined);
             setResults((prevResults) => [
               ...prevResults,
-              { transcript, timestamp }
+              { transcript, timestamp },
             ]);
             setLegacyResults((prevResults) => [...prevResults, transcript]);
           } else {
@@ -159,7 +159,7 @@ export default function useSpeechToText({
         } else {
           setResults((prevResults) => [
             ...prevResults,
-            { transcript, timestamp }
+            { transcript, timestamp },
           ]);
           setLegacyResults((prevResults) => [...prevResults, transcript]);
         }
@@ -193,7 +193,7 @@ export default function useSpeechToText({
 
     const stream = await startRecording({
       errHandler: () => setError('Microphone permission was denied'),
-      audioContext: audioContextRef.current as AudioContext
+      audioContext: audioContextRef.current as AudioContext,
     });
 
     setIsRecording(true);
@@ -213,7 +213,7 @@ export default function useSpeechToText({
     mediaStream.current = stream.clone();
 
     const speechEvents = Hark(mediaStream.current, {
-      audioContext: audioContextRef.current as AudioContext
+      audioContext: audioContextRef.current as AudioContext,
     });
 
     speechEvents.on('speaking', () => {
@@ -233,7 +233,7 @@ export default function useSpeechToText({
       stopRecording({
         exportWAV: true,
         wavCallback: (blob) =>
-          handleBlobToBase64({ blob, continuous: continuous || false })
+          handleBlobToBase64({ blob, continuous: continuous || false }),
       });
     });
   };
@@ -246,7 +246,7 @@ export default function useSpeechToText({
       stopMediaStream();
       stopRecording({
         exportWAV: true,
-        wavCallback: (blob) => handleBlobToBase64({ blob, continuous: false })
+        wavCallback: (blob) => handleBlobToBase64({ blob, continuous: false }),
       });
     }
   };
@@ -261,7 +261,7 @@ export default function useSpeechToText({
 
   const handleBlobToBase64 = ({
     blob,
-    continuous
+    continuous,
   }: {
     blob: Blob;
     continuous: boolean;
@@ -286,12 +286,12 @@ export default function useSpeechToText({
         encoding: 'LINEAR16',
         languageCode: 'en-US',
         sampleRateHertz: sampleRate,
-        ...googleCloudRecognitionConfig
+        ...googleCloudRecognitionConfig,
       };
 
       const data = {
         config,
-        audio
+        audio,
       };
 
       // Gets raw base 64 string data
@@ -301,7 +301,7 @@ export default function useSpeechToText({
         `https://speech.googleapis.com/v1/speech:recognize?key=${googleApiKey}`,
         {
           method: 'POST',
-          body: JSON.stringify(data)
+          body: JSON.stringify(data),
         }
       );
 
@@ -318,8 +318,8 @@ export default function useSpeechToText({
           {
             speechBlob: blob,
             transcript,
-            timestamp: Math.floor(Date.now() / 1000)
-          }
+            timestamp: Math.floor(Date.now() / 1000),
+          },
         ]);
       }
 
@@ -343,6 +343,6 @@ export default function useSpeechToText({
     results: useLegacyResults ? legacyResults : results,
     setResults,
     startSpeechToText,
-    stopSpeechToText
+    stopSpeechToText,
   };
 }

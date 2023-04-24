@@ -8,7 +8,7 @@ enum AudioEncoding {
   AMR = 4,
   AMR_WB = 5,
   OGG_OPUS = 6,
-  SPEEX_WITH_HEADER_BYTE = 7
+  SPEEX_WITH_HEADER_BYTE = 7,
 }
 
 /** Properties of a SpeechContext. */
@@ -75,7 +75,7 @@ enum InteractionType {
   PROFESSIONALLY_PRODUCED = 5,
   VOICE_SEARCH = 6,
   VOICE_COMMAND = 7,
-  DICTATION = 8
+  DICTATION = 8,
 }
 
 /** MicrophoneDistance enum. */
@@ -83,14 +83,14 @@ enum MicrophoneDistance {
   MICROPHONE_DISTANCE_UNSPECIFIED = 0,
   NEARFIELD = 1,
   MIDFIELD = 2,
-  FARFIELD = 3
+  FARFIELD = 3,
 }
 
 /** OriginalMediaType enum. */
 enum OriginalMediaType {
   ORIGINAL_MEDIA_TYPE_UNSPECIFIED = 0,
   AUDIO = 1,
-  VIDEO = 2
+  VIDEO = 2,
 }
 
 /** RecordingDeviceType enum. */
@@ -101,7 +101,7 @@ enum RecordingDeviceType {
   PHONE_LINE = 3,
   VEHICLE = 4,
   OTHER_OUTDOOR_DEVICE = 5,
-  OTHER_INDOOR_DEVICE = 6
+  OTHER_INDOOR_DEVICE = 6,
 }
 
 export interface GoogleCloudRecognitionConfig {
