@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './App.css';
 import useSpeechToText, { ResultType } from './hooks';
 import micIcon from './mic.svg';
@@ -10,13 +11,13 @@ function App() {
     isRecording,
     results,
     startSpeechToText,
-    stopSpeechToText
+    stopSpeechToText,
   } = useSpeechToText({
     continuous: true,
     crossBrowser: false,
     googleApiKey: process.env.REACT_APP_API_KEY,
     speechRecognitionProperties: { interimResults: true, lang: 'en-US' },
-    useLegacyResults: false
+    useLegacyResults: false,
   });
 
   if (error) {
@@ -25,7 +26,7 @@ function App() {
         style={{
           maxWidth: '600px',
           margin: '100px auto',
-          textAlign: 'center'
+          textAlign: 'center',
         }}
       >
         <p>
@@ -41,7 +42,7 @@ function App() {
       style={{
         maxWidth: '600px',
         margin: '100px auto',
-        textAlign: 'center'
+        textAlign: 'center',
       }}
     >
       <h1>Recording: {isRecording.toString()}</h1>

@@ -1,0 +1,8 @@
+**/node_modules/
+**/lib/
+**/dist/
+**/public/
+**/static/
+*-cache
+packages/docs
+packages/projects/messenger
