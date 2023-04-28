@@ -1,14 +1,13 @@
 import { Amplify } from 'aws-amplify';
 import AWS from 'aws-sdk';
-import env from 'react-dotenv';
 import { BrowserRouter } from 'react-router-dom';
 
 // Features
 import RoutesList from './routes';
 
 AWS.config.update({
-  accessKeyId: env.ACCESS_KEY_ID,
-  secretAccessKey: env.SECRET_ACCESS_KEY,
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
 });
 
 Amplify.configure({

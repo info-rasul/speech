@@ -51,7 +51,7 @@ export default function SignIn() {
   } = useSpeechToText({
     continuous: true,
     crossBrowser: false,
-    googleApiKey: process.env.REACT_APP_API_KEY,
+    googleApiKey: undefined,
     speechRecognitionProperties: { interimResults: true, lang: 'en-US' },
     useLegacyResults: false,
   });
@@ -107,7 +107,7 @@ export default function SignIn() {
         <Grid
           container
           item
-          xs={false}
+          xs={12}
           sm={4}
           md={7}
           justifyContent="center"

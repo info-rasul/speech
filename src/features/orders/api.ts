@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import env from 'react-dotenv';
 
 // Interface
 import { Order as Interface } from './schema';
@@ -17,7 +16,7 @@ export const getAllOrders = createAsyncThunk(
     try {
       const response = await axios({
         url: `/${table_name}`,
-        baseURL: env.API_URL,
+        baseURL: process.env.API_URL,
         method: 'get',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +36,7 @@ export const addOrder = createAsyncThunk(
   async (item: Interface) => {
     const response = await axios({
       url: `/${table_name}`,
-      baseURL: env.API_URL,
+      baseURL: process.env.API_URL,
       method: 'put',
       data: item,
       headers: {
@@ -55,7 +54,7 @@ export const updateOrder = createAsyncThunk(
   async (item: Interface) => {
     const response = await axios({
       url: `/${table_name}/${item.id}`,
-      baseURL: env.API_URL,
+      baseURL: process.env.API_URL,
       method: 'put',
       data: item,
       headers: {
@@ -73,7 +72,7 @@ export const deleteOrder = createAsyncThunk(
   async (item: Interface) => {
     const response = await axios({
       url: `/${table_name}/${item.id}`,
-      baseURL: env.API_URL,
+      baseURL: process.env.API_URL,
       method: 'delete',
       headers: {
         'Content-Type': 'application/json',

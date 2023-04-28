@@ -6,3 +6,4 @@
 *-cache
 packages/docs
 packages/projects/messenger
+**/build/
