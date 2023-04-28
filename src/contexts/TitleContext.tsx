@@ -1,7 +1,8 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState } from 'react';
 
 export const TitleContext = createContext({
-  title: "",
+  title: '',
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setTitle: (arg: string) => {},
 });
 
@@ -11,7 +12,7 @@ type ProviderProps = {
 };
 
 const TitleContextProvider = ({ children }: ProviderProps) => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
 
   return (
     <TitleContext.Provider value={{ title, setTitle }}>

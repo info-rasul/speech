@@ -1,30 +1,34 @@
-import { useEffect, useState } from 'react';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { Alert } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import CssBaseline from '@mui/material/CssBaseline';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import NotificationsIcon from "icons/NotificationsIcon";
-import { H6 } from "components/Typography";
-
-// Amplify Auth
 import { Auth } from 'aws-amplify';
-import { loginUser, selectUser } from './slice';
+import useSpeechToText, { ResultType } from 'components/SpeechToText/hooks';
+import { H6 } from 'components/Typography';
+import NotificationsIcon from 'icons/NotificationsIcon';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Alert } from '@mui/material';
-import useSpeechToText, { ResultType } from 'components/SpeechToText/hooks';
+
+import { loginUser, selectUser } from './slice';
 function Copyright(props: any) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
       {'Copyright © '}
       <Link color="inherit" href="https://milkyware.com/">
         MilkyWare
@@ -52,18 +56,18 @@ export default function SignIn() {
     useLegacyResults: false,
   });
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  var user = useSelector(selectUser)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     // redirect authenticated user to profile screen
-    if (user.email_verified) navigate('/dashboard')
-    else if (user.username) navigate("/verify")
-  }, [navigate, user])
+    if (user.email_verified) navigate('/dashboard');
+    else if (user.username) navigate('/verify');
+  }, [navigate, user]);
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [emptyField, setEmptyField] = useState(false);
   const [error, setError] = useState(false);
 
@@ -76,26 +80,25 @@ export default function SignIn() {
           username: user.username,
           email_verified: user.attributes.email_verified,
           jwt: user.signInUserSession.accessToken.jwtToken,
-        }
-        dispatch(loginUser(newUser))
+        };
+        dispatch(loginUser(newUser));
       } catch (error) {
-        setError(true)
+        setError(true);
       }
     }
   };
 
   const verifyFields = () => {
-    setError(false)
-    setEmptyField(false)
+    setError(false);
+    setEmptyField(false);
     // Verify if required fields are valid
     if (email && password) {
-      return true
+      return true;
+    } else {
+      setEmptyField(true);
     }
-    else {
-      setEmptyField(true)
-    }
-    return false
-  }
+    return false;
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -112,11 +115,13 @@ export default function SignIn() {
         >
           <Button
             onClick={isRecording ? stopSpeechToText : startSpeechToText}
-            endIcon={<NotificationsIcon sx={{ color: "text.disabled" }} />}
-            sx={{ p: 0, "&:hover": { backgroundColor: "transparent" } }}
+            endIcon={<NotificationsIcon sx={{ color: 'text.disabled' }} />}
+            sx={{ p: 0, '&:hover': { backgroundColor: 'transparent' } }}
             data-recording={isRecording}
           >
-            <H6 color="text.disabled">{isRecording ? 'Stop Recording' : 'Start Recording'}</H6>
+            <H6 color="text.disabled">
+              {isRecording ? 'Stop Recording' : 'Start Recording'}
+            </H6>
           </Button>
 
           <ul>
@@ -173,7 +178,9 @@ export default function SignIn() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
-              {error && <Alert severity="error">Credenciales incorrectas!</Alert>}
+              {error && (
+                <Alert severity="error">Credenciales incorrectas!</Alert>
+              )}
               <Button
                 fullWidth
                 variant="contained"

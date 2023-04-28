@@ -1,8 +1,9 @@
-import * as React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
 import { Card, CardHeader, Divider } from '@mui/material';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import * as React from 'react';
+
 import OrderTable from './OrderTable';
 
 interface TabPanelProps {
@@ -23,11 +24,7 @@ function TabPanel(props: TabPanelProps) {
       style={{ width: '100%' }}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 2 }}>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 2 }}>{children}</Box>}
     </div>
   );
 }
@@ -40,12 +37,12 @@ function a11yProps(index: number) {
 }
 
 interface PropsType {
-  rows: any[],
-  title: string,
+  rows: any[];
+  title: string;
 }
 
 export default function VerticalTabs(props: PropsType) {
-  const { title, rows } = props
+  const { title, rows } = props;
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -54,13 +51,9 @@ export default function VerticalTabs(props: PropsType) {
 
   return (
     <Card>
-      <CardHeader
-        title={title}
-      />
+      <CardHeader title={title} />
       <Divider />
-      <Box
-        sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex' }}
-      >
+      <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex' }}>
         <Tabs
           orientation="vertical"
           variant="scrollable"
@@ -69,10 +62,14 @@ export default function VerticalTabs(props: PropsType) {
           aria-label="Vertical tabs example"
           sx={{ borderRight: 1, borderColor: 'divider' }}
         >
-          {rows.map(element => {
+          {rows.map((element) => {
             return (
-              <Tab key={element.id} label={`Orden ${element.id}`} {...a11yProps(element.id)} />
-            )
+              <Tab
+                key={element.id}
+                label={`Orden ${element.id}`}
+                {...a11yProps(element.id)}
+              />
+            );
           })}
         </Tabs>
         {rows.map((element, index) => {
@@ -80,7 +77,7 @@ export default function VerticalTabs(props: PropsType) {
             <TabPanel key={element.id} value={value} index={index}>
               <OrderTable order={element} />
             </TabPanel>
-          )
+          );
         })}
       </Box>
     </Card>

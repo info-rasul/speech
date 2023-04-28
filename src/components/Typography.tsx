@@ -1,26 +1,26 @@
-import { Box, BoxProps, styled } from "@mui/material";
-import clsx from "clsx";
-import React from "react";
+import { Box, BoxProps, styled } from '@mui/material';
+import clsx from 'clsx';
+import React from 'react';
 
 const StyledBox = styled(Box)<{
   textTransformStyle?: any;
   ellipsis?: boolean;
 }>(({ textTransformStyle, ellipsis }) => ({
-  textTransform: textTransformStyle || "none",
-  whiteSpace: ellipsis ? "nowrap" : "normal",
-  overflow: ellipsis ? "hidden" : "",
-  textOverflow: ellipsis ? "ellipsis" : "",
+  textTransform: textTransformStyle || 'none',
+  whiteSpace: ellipsis ? 'nowrap' : 'normal',
+  overflow: ellipsis ? 'hidden' : '',
+  textOverflow: ellipsis ? 'ellipsis' : '',
 }));
 
 type Props = {
   ellipsis?: boolean;
   textTransform?:
-    | "none"
-    | "capitalize"
-    | "uppercase"
-    | "lowercase"
-    | "initial"
-    | "inherit";
+    | 'none'
+    | 'capitalize'
+    | 'uppercase'
+    | 'lowercase'
+    | 'initial'
+    | 'inherit';
 };
 
 export const H1: React.FC<BoxProps & Props> = ({
@@ -34,7 +34,7 @@ export const H1: React.FC<BoxProps & Props> = ({
     <StyledBox
       textTransformStyle={textTransform}
       ellipsis={ellipsis}
-      className={clsx({ [className || ""]: true })}
+      className={clsx({ [className || '']: true })}
       component="h1"
       mb={0}
       mt={0}
@@ -59,7 +59,7 @@ export const H2: React.FC<BoxProps & Props> = ({
     <StyledBox
       textTransformStyle={textTransform}
       ellipsis={ellipsis}
-      className={clsx({ [className || ""]: true })}
+      className={clsx({ [className || '']: true })}
       component="h2"
       mb={0}
       mt={0}
@@ -84,7 +84,7 @@ export const H3: React.FC<BoxProps & Props> = ({
     <StyledBox
       textTransformStyle={textTransform}
       ellipsis={ellipsis}
-      className={clsx({ [className || ""]: true })}
+      className={clsx({ [className || '']: true })}
       component="h3"
       mb={0}
       mt={0}
@@ -110,7 +110,7 @@ export const H4: React.FC<BoxProps & Props> = ({
       textTransformStyle={textTransform}
       ellipsis={ellipsis}
       className={clsx({
-        [className || ""]: true,
+        [className || '']: true,
       })}
       component="h4"
       mb={0}
@@ -137,7 +137,7 @@ export const H5: React.FC<BoxProps & Props> = ({
       textTransformStyle={textTransform}
       ellipsis={ellipsis}
       className={clsx({
-        [className || ""]: true,
+        [className || '']: true,
       })}
       component="h5"
       mb={0}
@@ -164,7 +164,7 @@ export const H6: React.FC<BoxProps & Props> = ({
       textTransformStyle={textTransform}
       ellipsis={ellipsis}
       className={clsx({
-        [className || ""]: true,
+        [className || '']: true,
       })}
       component="h6"
       mb={0}
@@ -191,7 +191,7 @@ export const Paragraph: React.FC<BoxProps & Props> = ({
       textTransformStyle={textTransform}
       ellipsis={ellipsis}
       className={clsx({
-        [className || ""]: true,
+        [className || '']: true,
       })}
       component="p"
       mb={0}
@@ -216,7 +216,7 @@ export const Small: React.FC<BoxProps & Props> = ({
       textTransformStyle={textTransform}
       ellipsis={ellipsis}
       className={clsx({
-        [className || ""]: true,
+        [className || '']: true,
       })}
       component="small"
       fontSize="12px"
@@ -241,7 +241,7 @@ export const Span: React.FC<BoxProps & Props> = ({
       textTransformStyle={textTransform}
       ellipsis={ellipsis}
       className={clsx({
-        [className || ""]: true,
+        [className || '']: true,
       })}
       component="span"
       lineHeight="1.5"
@@ -264,7 +264,7 @@ export const Tiny: React.FC<BoxProps & Props> = ({
       textTransformStyle={textTransform}
       ellipsis={ellipsis}
       className={clsx({
-        [className || ""]: true,
+        [className || '']: true,
       })}
       component="small"
       fontSize="11px"

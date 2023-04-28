@@ -1,20 +1,22 @@
-import useLocalStorage from "../hooks/useLocalStorage";
-import { createContext, ReactNode } from "react";
-import { themeSettingsProps } from "../theme";
+import { createContext, ReactNode } from 'react';
+
+import useLocalStorage from '../hooks/useLocalStorage';
+import { themeSettingsProps } from '../theme';
 
 export const THEMES = {
-  LIGHT: "light",
-  DARK: "dark",
+  LIGHT: 'light',
+  DARK: 'dark',
 };
 
 const initialSettings: themeSettingsProps = {
-  direction: "ltr",
+  direction: 'ltr',
   theme: THEMES.LIGHT,
   responsiveFontSizes: true,
 };
 
 export const SettingsContext = createContext({
   settings: initialSettings,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   saveSettings: (arg: themeSettingsProps) => {},
 });
 
@@ -25,7 +27,7 @@ type settingsProviderProps = {
 
 const SettingsProvider = ({ children }: settingsProviderProps) => {
   const { data: settings, storeData: setSettings } = useLocalStorage(
-    "settings",
+    'settings',
     initialSettings
   );
 

@@ -6,11 +6,11 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 interface PropsType {
-    title: String,
-    children: any,
-    open: boolean,
-    setOpen: any,
-    onConfirm: any,
+  title: string;
+  children: any;
+  open: boolean;
+  setOpen: any;
+  onConfirm: any;
 }
 
 export default function ConfirmDialog(props: PropsType) {
@@ -27,13 +27,9 @@ export default function ConfirmDialog(props: PropsType) {
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title">
-          {title}
-        </DialogTitle>
+        <DialogTitle id="responsive-dialog-title">{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            {children}
-          </DialogContentText>
+          <DialogContentText>{children}</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>

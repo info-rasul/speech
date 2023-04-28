@@ -1,13 +1,14 @@
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { StyledEngineProvider } from '@mui/material/styles';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { Toaster } from 'react-hot-toast';
 import { Provider } from 'react-redux';
-import { store, persistor } from './app/store';
-import App from './App';
 import { PersistGate } from 'redux-persist/integration/react';
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { StyledEngineProvider } from "@mui/material/styles";
-import { Toaster } from "react-hot-toast";
-import { ukoTheme } from "./theme";
+
+import App from './App';
+import { store, persistor } from './app/store';
+import { ukoTheme } from './theme';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -29,11 +30,11 @@ root.render(
       <ThemeProvider theme={appTheme}>
         <CssBaseline />
         <Toaster toastOptions={toasterOptions} />
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <App />
-            </PersistGate>
-          </Provider>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <App />
+          </PersistGate>
+        </Provider>
       </ThemeProvider>
     </StyledEngineProvider>
   </React.StrictMode>

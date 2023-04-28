@@ -1,25 +1,32 @@
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useEffect, useState } from 'react';
-import { Auth } from 'aws-amplify';
-import { selectUser, confirmUser } from './slice';
-import { useAppSelector } from '../../app/hooks';
-import { useDispatch } from 'react-redux';
 import { ButtonGroup } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Auth } from 'aws-amplify';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import { selectUser, confirmUser } from './slice';
+
+import { useAppSelector } from '../../app/hooks';
 
 function Copyright(props: any) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
         MilkyWare
@@ -33,31 +40,30 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function Verify() {
-
-  const [code, setCode] = useState('')
+  const [code, setCode] = useState('');
   const user = useAppSelector(selectUser);
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // redirect authenticated user to profile screen
-    if (user.email_verified) navigate('/dashboard')
-  }, [navigate, user])
+    if (user.email_verified) navigate('/dashboard');
+  }, [navigate, user]);
 
   async function resendConfirmationCode() {
     try {
       await Auth.resendSignUp(user.email);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
 
   async function verify() {
     try {
       await Auth.confirmSignUp(user.email, code);
-      dispatch(confirmUser())
+      dispatch(confirmUser());
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
 
@@ -104,7 +110,7 @@ export default function Verify() {
               <Button
                 fullWidth
                 variant="contained"
-                color='success'
+                color="success"
                 onClick={verify}
               >
                 Confirmar

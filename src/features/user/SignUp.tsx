@@ -1,23 +1,29 @@
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
-import { loginUser, selectUser } from "./slice"
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import { loginUser, selectUser } from './slice';
 
 function Copyright(props: any) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
         Milkyware
@@ -31,64 +37,62 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignUp() {
-
-  var user = useSelector(selectUser)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [verifyPassword, setVerifyPassword] = useState('')
-  const [nickname, setNickname] = useState('')
+  const user = useSelector(selectUser);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [verifyPassword, setVerifyPassword] = useState('');
+  const [nickname, setNickname] = useState('');
   const [emptyField, setEmptyField] = useState(false);
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(user)
+    console.log(user);
     // redirect authenticated user to profile screen
-    if (user.email_verified) navigate('/home')
-    else if (user.username) navigate("/verify")
-  }, [navigate, user])
+    if (user.email_verified) navigate('/home');
+    else if (user.username) navigate('/verify');
+  }, [navigate, user]);
 
   async function signUp() {
     if (verifyFields()) {
-      const username = email
+      const username = email;
       try {
         await Auth.signUp({
           username,
           password,
           attributes: {
-            nickname,          // optional
-            // other custom attributes 
+            nickname, // optional
+            // other custom attributes
           },
-          autoSignIn: { // optional - enables auto sign in after user is confirmed
+          autoSignIn: {
+            // optional - enables auto sign in after user is confirmed
             enabled: true,
-          }
+          },
         });
         const newUser = {
           email: email,
           username: email,
           email_verified: false,
           jwt: null,
-        }
-        dispatch(loginUser(newUser))
+        };
+        dispatch(loginUser(newUser));
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     }
   }
 
   const verifyFields = () => {
-    setEmptyField(false)
+    setEmptyField(false);
     // Verify if required fields are valid
-    if (email && password && (password === verifyPassword) && nickname) {
-      return true
+    if (email && password && password === verifyPassword && nickname) {
+      return true;
+    } else {
+      setEmptyField(true);
     }
-    else {
-      setEmptyField(true)
-    }
-    return false
-  }
-
+    return false;
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -147,7 +151,9 @@ export default function SignUp() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="new-password"
-                  error={emptyField && (!password || (password !== verifyPassword))}
+                  error={
+                    emptyField && (!password || password !== verifyPassword)
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
@@ -158,7 +164,10 @@ export default function SignUp() {
                   id="verifyPassword"
                   label="Verifica Contrasena"
                   name="verifyPassword"
-                  error={emptyField && (!verifyPassword || (password !== verifyPassword))}
+                  error={
+                    emptyField &&
+                    (!verifyPassword || password !== verifyPassword)
+                  }
                   value={verifyPassword}
                   onChange={(e) => setVerifyPassword(e.target.value)}
                 />
