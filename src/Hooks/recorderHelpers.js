@@ -1,4 +1,4 @@
-import Recorder from './recorder';
+import Recorder from 'Hooks/recorder';
 
 let microphoneStream; // stream from getUserMedia()
 let rec = Recorder; // Recorder.js object

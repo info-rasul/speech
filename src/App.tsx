@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import useSpeechToText, { ResultType } from './hooks';
+import useSpeechToText, { ResultType } from 'Hooks';
 import micIcon from './mic.svg';
 
 function App() {

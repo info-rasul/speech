@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import Hark from 'hark';
-import { startRecording, stopRecording } from './recorderHelpers';
+import { startRecording, stopRecording } from 'Hooks/recorderHelpers';
 
-import { GoogleCloudRecognitionConfig } from './googleCloudRecognitionConfig';
+import { GoogleCloudRecognitionConfig } from 'Hooks/GoogleCloudRecognitionConfig';
 
 export interface SpeechRecognitionProperties {
   // continuous: do not pass continuous here, instead pass it as a param to the hook
