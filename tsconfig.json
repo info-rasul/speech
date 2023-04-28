@@ -1,17 +1,27 @@
 {
-  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "allowSyntheticDefaultImports": true,
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "baseUrl": "src",
     "allowJs": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
-    "paths": {
-      "@messenger/core": ["packages/core/src/index"],
-      "@messenger/*": ["packages/core/src/*"],
-      "@messenger/graphs": ["packages/graphs/src/index"],
-      "@messenger/utils": ["packages/utils/src/index"],
-      "@messenger/utils/*": ["packages/utils/src/*"]
-    }
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
   },
-  "exclude": ["**/node_modules/**"]
+  "include": [
+    "src"
+  ]
 }

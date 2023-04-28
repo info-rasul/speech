@@ -1,62 +1,33 @@
-import React from 'react';
+import { BrowserRouter } from "react-router-dom";
 
-import './App.css';
-import useSpeechToText, { ResultType } from './hooks';
-import micIcon from './mic.svg';
+import AWS from 'aws-sdk'
+import { Amplify } from "aws-amplify";
+import env from "react-dotenv";
+
+// Features
+import RoutesList from "./routes";
+
+AWS.config.update({
+  accessKeyId: env.ACCESS_KEY_ID,
+  secretAccessKey: env.SECRET_ACCESS_KEY
+})
+
+
+Amplify.configure({
+  Auth: {
+    identityPoolId: 'us-east-1:a2eafb8f-2ffc-437a-a7c6-d344fa2d7b07',
+    region: "us-east-1",
+    userPoolId: "us-east-1_ocHYKrTh4", // Please change this value.
+    userPoolWebClientId: "72g04gbdb9abitaekb8rui3ll4", // Please change this value.
+  },
+});
+
 
 function App() {
-  const {
-    error,
-    interimResult,
-    isRecording,
-    results,
-    startSpeechToText,
-    stopSpeechToText,
-  } = useSpeechToText({
-    continuous: true,
-    crossBrowser: false,
-    googleApiKey: process.env.REACT_APP_API_KEY,
-    speechRecognitionProperties: { interimResults: true, lang: 'en-US' },
-    useLegacyResults: false,
-  });
-
-  if (error) {
-    return (
-      <div
-        style={{
-          maxWidth: '600px',
-          margin: '100px auto',
-          textAlign: 'center',
-        }}
-      >
-        <p>
-          {error}
-          <span style={{ fontSize: '3rem' }}>🤷‍</span>
-        </p>
-      </div>
-    );
-  }
-
   return (
-    <div
-      style={{
-        maxWidth: '600px',
-        margin: '100px auto',
-        textAlign: 'center',
-      }}
-    >
-      <h1>Recording: {isRecording.toString()}</h1>
-      <button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
-        <span>{isRecording ? 'Stop Recording' : 'Start Recording'}</span>
-        <img data-recording={isRecording} src={micIcon} alt="" />
-      </button>
-      <ul>
-        {(results as ResultType[]).map((result) => (
-          <li key={result.timestamp}>{result.transcript}</li>
-        ))}
-        {interimResult && <li>{interimResult}</li>}
-      </ul>
-    </div>
+    <BrowserRouter>
+      <RoutesList />
+    </BrowserRouter>
   );
 }
 
